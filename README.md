@@ -68,7 +68,6 @@ https://dashboard.heroku.com
 
 | Parameter | Type     | Description                       | Required           |
 | :-------- | :------- | :-------------------------------- | :----------------- |
-| `id`      | `string` | Id of user to identify            | :white_check_mark: |
 | `email`   | `string` | Email to sing in | :white_check_mark: |
 | `password` | `string` | Current Password | :white_check_mark: |
 | `newPassword` | `string` | Password to change | :white_check_mark: |

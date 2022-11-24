@@ -76,25 +76,36 @@ const controller = {
     res.status(200).json(response);
   },
   changePassword: async (req, res) => {
-    const { id, email, password, newPassword } = req.body;
+    const { email, password, newPassword } = req.body;
     // Validamos que el usuario exista
-    const exist = await existUser(id);
-    if (!exist) {
+    const user = await User.findOne({ email: email }).exec();
+    if (!user) {
       res.status(500).json({
-        error: "El usuario no existe.",
+        error: `El email ${email} no se encuentra registrado.`,
       });
       return;
     }
-    // Validamos la contraseña actual
-    if (await validatePassword(email, password)) {
+    // Validamos la contraseña anterior
+    const valid = await validatePassword(email, password);
+    if (!valid) {
       res.status(500).json({
-        error: "La contraeña no puede ser la misma.",
+        error: "Contraseña Incorrecta",
       });
       return;
     }
-    newPassword = await encrypt(newPassword, email);
-    const update = await User.findByIdAndUpdate(id, { password: newPassword });
-    res.status(200).json(update);
+    // Validamos la contraseña nueva
+    if (await validatePassword(email, newPassword)) {
+      res.status(500).json({
+        error: "La contraeña nueva debe ser diferente a la actual.",
+      });
+      return;
+    }
+    const finalPassword = await encrypt(newPassword, email);
+    const update = await User.findByIdAndUpdate(user.id, { password: finalPassword });
+    res.status(200).json({
+      msj: "Contraseña Actualizada Correctamente",
+      user: update,
+    });
   },
   validatePassword: async (req, res) => {
     const { email, password } = req.body;
