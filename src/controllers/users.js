@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import { encrypt } from "../services/crypto.js";
 import {
   existUser,
-  validateInfoUser,
+  validateProps,
   validatePassword,
 } from "../utils/validations.js";
 
@@ -26,7 +26,7 @@ const controller = {
   },
   create: async (req, res) => {
     const { email, password } = req.body;
-    const isValid = validateInfoUser(req.body);
+    const isValid = validateProps(req.body);
 
     if (isValid.res) {
       const newPass = await encrypt(password, email);
@@ -44,7 +44,7 @@ const controller = {
   },
   update: async (req, res) => {
     const id = req.params.id;
-    const isValid = validateInfoUser(req.body);
+    const isValid = validateProps(req.body);
     // Validamos que los datos vengan completos
     if (!isValid.res) {
       res.status(500).json({

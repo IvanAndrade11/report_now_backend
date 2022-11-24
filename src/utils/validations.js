@@ -1,12 +1,8 @@
 import { comparePassword } from "../services/crypto.js";
 import User from "../models/User.js";
+import News from "../models/News.js";
 
-export async function existUser(id) {
-  const user = await User.findById(id);
-  return user ? true : false;
-}
-
-export function validateInfoUser(data) {
+export function validateProps(data) {
   for (var prop in data) {
     if (data.hasOwnProperty(prop)) {
       if (data[prop] === "" || data[prop] === " ") {
@@ -24,6 +20,16 @@ export function validateInfoUser(data) {
     }
   }
   return { res: true };
+}
+
+export async function existUser(id) {
+  const user = await User.findById(id);
+  return user ? true : false;
+}
+
+export async function existNews(id) {
+  const news = await News.findById(id);
+  return news ? true : false;
 }
 
 export async function validatePassword(email, password) {

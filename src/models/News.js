@@ -15,7 +15,7 @@ const newsSchema = new Schema(
             required: true
         },
         id_user: {
-            type: Number,
+            type: String,
             required: true
         }
     },

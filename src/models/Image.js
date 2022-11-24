@@ -11,11 +11,11 @@ const imageSchema = new Schema(
             required: true
         },
         id_news: {
-            type: Number,
+            type: String,
             required: true
         },
         id_user: {
-            type: Number,
+            type: String,
             required: true
         }
     },
