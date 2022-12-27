@@ -1,15 +1,15 @@
 import Router from 'express';
 import controller from '../controllers/users.js';
-import { validateReqCreateUser } from '../validators/users.js';
-import { checkApiKey } from '../middlewares/auth.handler.js';
+import { validateCreateUser } from '../validators/users.js';
+import { checkRole } from '../middlewares/auth.handler.js';
 
 const routerUsers = Router();
-routerUsers.get('/', checkApiKey, controller.list);
+routerUsers.get('/', controller.list);
 routerUsers.get('/:id', controller.get);
-routerUsers.post('/create', validateReqCreateUser, controller.create);
+routerUsers.post('/create', validateCreateUser, controller.create);
 routerUsers.put('/:id', controller.update);
-routerUsers.delete('/:id', controller.delete);
+routerUsers.delete('/:id', checkRole, controller.delete);
 routerUsers.post('/changePassword', controller.changePassword);
-routerUsers.post('/validate', controller.validatePassword);
+// routerUsers.post('/validate', controller.validatePassword);
 
 export default routerUsers;

@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import { encrypt } from '../services/crypto.js';
 import {
-    existUser,
+    existObject,
     validateProps,
     validatePassword,
 } from '../utils/validations.js';
@@ -13,16 +13,16 @@ const controller = {
     },
     get: async (req, res) => {
         const id = req.params.id;
-        const exist = await existUser(id);
+        const exist = existObject(id, User);
 
         if (!exist) {
             res.status(500).json({
                 error: `El usuario con id ${id} no existe.`,
             });
+        }else{
+            const user = await User.findById(id);
+            res.status(200).json(user);
         }
-
-        const user = await User.findById(id);
-        res.status(200).json(user);
     },
     create: async (req, res) => {
         const { email, password } = req.body;
@@ -53,7 +53,7 @@ const controller = {
             return;
         }
         // Validamos que el usuario exista
-        const exist = await existUser(id);
+        const exist = existObject(id, User);
         if (!exist) {
             res.status(500).json({
                 error: 'El usuario no existe.',
@@ -66,7 +66,7 @@ const controller = {
     },
     delete: async (req, res) => {
         const id = req.params.id;
-        const exist = await existUser(id);
+        const exist = existObject(id, User);
         if (!exist) {
             res.status(500).json({
                 error: `El usuario con id ${id} no existe.`,
@@ -131,7 +131,7 @@ const controller = {
             valid: valid,
             user: user,
         });
-    },
+    }
 };
 
 

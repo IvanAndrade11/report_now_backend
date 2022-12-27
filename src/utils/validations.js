@@ -1,6 +1,6 @@
 import { comparePassword } from '../services/crypto.js';
 import User from '../models/User.js';
-import News from '../models/News.js';
+import mongoose from 'mongoose';
 
 export function validateProps(data) {
     for (var prop in data) {
@@ -22,14 +22,13 @@ export function validateProps(data) {
     return { res: true };
 }
 
-export async function existUser(id) {
-    const user = await User.findById(id);
-    return user ? true : false;
-}
-
-export async function existNews(id) {
-    const news = await News.findById(id);
-    return news ? true : false;
+export function existObject(id, model) {
+    return mongoose.Types.ObjectId.isValid(id)
+        ? async () => {
+            const data = await model.findById(id);
+            return data ? true : false;
+        }
+        : false;
 }
 
 export async function validatePassword(email, password) {

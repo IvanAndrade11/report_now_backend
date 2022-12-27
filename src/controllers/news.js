@@ -1,6 +1,6 @@
 import News from '../models/News.js';
 import {
-    existNews,
+    existObject,
     validateProps,
 } from '../utils/validations.js';
 
@@ -11,16 +11,16 @@ const controller = {
     },
     get: async (req, res) => {
         const id = req.params.id;
-        const exist = await existNews(id);
+        const exist = existObject(id, News);
 
         if (!exist) {
             res.status(500).json({
-                error: `El reporte con id ${id} no existe.`,
+                error: `El reporte con id '${id}' no existe.`,
             });
+        }else{
+            const news = await News.findById(id);
+            res.status(200).json(news);
         }
-
-        const news = await News.findById(id);
-        res.status(200).json(news);
     },
     create: async (req, res) => {
         const isValid = validateProps(req.body);
@@ -47,7 +47,7 @@ const controller = {
             return;
         }
 
-        const exist = await existNews(id);
+        const exist = existObject(id, News);
         if (!exist) {
             res.status(500).json({
                 error: 'El reporte no existe.',
@@ -60,7 +60,7 @@ const controller = {
     },
     delete: async (req, res) => {
         const id = req.params.id;
-        const exist = await existNews(id);
+        const exist = existObject(id, News);
         if (!exist) {
             res.status(500).json({
                 error: `El reporte con id ${id} no existe.`,
@@ -68,6 +68,11 @@ const controller = {
         }
         const response = await News.findByIdAndDelete(id);
         res.status(200).json(response);
+    },
+    getByIdUser: async (req, res) => {
+        const { user } = req;
+        const news = await News.find({ id_user: user.sub });
+        res.status(200).json(news);
     },
 };
 
