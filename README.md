@@ -12,6 +12,20 @@ https://dashboard.heroku.com
 ### Endpoint
 * https://report-now.herokuapp.com
 
+### AUTHENTICATION
+
+#### Login
+
+```http
+  [POST] /api/auth/login
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `email`   | `string` | Email to sing in | :white_check_mark: |
+| `password` | `string` | Current Password | :white_check_mark: |
+
+** To make the following requests it is necessary to add in the header the bearer token that returns the login **
 ### USER
 
 #### List all users
@@ -72,17 +86,6 @@ https://dashboard.heroku.com
 | `password` | `string` | Current Password | :white_check_mark: |
 | `newPassword` | `string` | Password to change | :white_check_mark: |
 
-#### Sing In
-
-```http
-  [POST] /api/users/validate
-```
-
-| Parameter | Type     | Description                       | Required           |
-| :-------- | :------- | :-------------------------------- | :----------------- |
-| `email`   | `string` | Email to sing in | :white_check_mark: |
-| `password` | `string` | Current Password | :white_check_mark: |
-
 ### REPORT
 
 #### List all reports
@@ -128,6 +131,20 @@ https://dashboard.heroku.com
 ```http
   [DELETE] /api/users/${id}
 ```
+
+### MAILER
+
+#### Send Mail
+
+```http
+  [POST] /api/mailer/sendMail
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `to`   | `string` | Mail recipient | :white_check_mark: |
+| `subject`    | `string` | Text that will carry the subject of the email | :white_check_mark: |
+| `text`   | `string` | Information to send in the body of the email | :white_check_mark: |
 
 ## Authors
 

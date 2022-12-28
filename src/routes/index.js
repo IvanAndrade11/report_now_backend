@@ -4,6 +4,7 @@ import { checkApiKey } from '../middlewares/auth.handler.js';
 import routerAuth from './auth.js';
 import routerUsers from './users.js';
 import routerNews from './news.js';
+import routerMailer from './mailer.js';
 
 const routerApi = (app) => {
     const router = express.Router();
@@ -27,6 +28,12 @@ const routerApi = (app) => {
         passport.authenticate('jwt', { session: false }),
         checkApiKey,
         routerNews
+    );
+
+    router.use(
+        '/mailer',
+        passport.authenticate('jwt', { session: false }),
+        routerMailer
     );
 };
 
