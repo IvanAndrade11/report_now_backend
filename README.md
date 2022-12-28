@@ -1,7 +1,7 @@
-## Location Data Base
+## Data Base Location
 https://cloud.mongodb.com/
 
-## Page Heroku to deploy API 
+## Page Heroku Deployed API 
 https://dashboard.heroku.com
 
 ## User Mailer Provider
@@ -9,10 +9,10 @@ https://dashboard.heroku.com
 
 ## API Reference
 
-### Endpoint
+### :rocket: ENDPOINT
 * https://report-now.herokuapp.com
 
-### AUTHENTICATION
+### :robot: AUTHENTICATION
 
 #### Login
 
@@ -26,7 +26,7 @@ https://dashboard.heroku.com
 | `password` | `string` | Current Password | :white_check_mark: |
 
 ** To make the following requests it is necessary to add in the header the bearer token that returns the login **
-### USER
+### :busts_in_silhouette: USER
 
 #### List all users
 
@@ -86,7 +86,7 @@ https://dashboard.heroku.com
 | `password` | `string` | Current Password | :white_check_mark: |
 | `newPassword` | `string` | Password to change | :white_check_mark: |
 
-### REPORT
+### :pencil: REPORT
 
 #### List all reports
 
@@ -132,7 +132,7 @@ https://dashboard.heroku.com
   [DELETE] /api/users/${id}
 ```
 
-### MAILER
+### :page_facing_up: MAILER
 
 #### Send Mail
 
