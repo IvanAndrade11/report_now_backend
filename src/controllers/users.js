@@ -107,31 +107,6 @@ const controller = {
             user: update,
         });
     },
-    validatePassword: async (req, res) => {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email: email }).exec();
-
-        if (!user) {
-            res.status(500).json({
-                error: `El email ${email} no se encuentra registrado.`,
-                valid: false,
-            });
-            return;
-        }
-        const valid = await validatePassword(email, password);
-        if (!valid) {
-            res.status(500).json({
-                error: 'Contraseña Incorrecta',
-                valid: valid,
-            });
-            return;
-        }
-        res.status(200).json({
-            msj: 'Usuario Validado Correctamente',
-            valid: valid,
-            user: user,
-        });
-    }
 };
 
 

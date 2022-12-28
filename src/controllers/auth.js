@@ -1,24 +1,14 @@
-import jsonwebtoken from 'jsonwebtoken';
-import { JWT_TOKEN } from '../config.js';
+import AuthService from "../services/auth.js";
+const service = new AuthService()
 
 const controller = {
-    login: async (req, res, next) => {
+    login: (req, res) => {
         try {
             const { user } = req;
-            const token = jsonwebtoken.sign(
-                { 
-                    sub: user._id, 
-                    admin: user.admin 
-                }, 
-                JWT_TOKEN, 
-                { expiresIn: '1h' }
-            );
-            res.status(200).json({
-                user,
-                token
-            });
+            const token = service.signToken(user, '1h')
+            res.status(200).json({user, token})
         } catch (error) {
-            next(error);
+            res.status(500).json(error)
         }
     },
 };

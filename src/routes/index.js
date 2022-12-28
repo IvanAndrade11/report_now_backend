@@ -13,6 +13,7 @@ const routerApi = (app) => {
     router.use(
         '/auth',
         passport.authenticate('local', { session: false }),
+        checkApiKey,
         routerAuth
     );
 
@@ -32,7 +33,7 @@ const routerApi = (app) => {
 
     router.use(
         '/mailer',
-        passport.authenticate('jwt', { session: false }),
+        checkApiKey,
         routerMailer
     );
 };

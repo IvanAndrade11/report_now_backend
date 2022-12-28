@@ -10,6 +10,5 @@ routerUsers.post('/create', validateCreateUser, controller.create);
 routerUsers.put('/:id', controller.update);
 routerUsers.delete('/:id', checkRole, controller.delete);
 routerUsers.post('/changePassword', controller.changePassword);
-// routerUsers.post('/validate', controller.validatePassword);
 
 export default routerUsers;

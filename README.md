@@ -134,6 +134,16 @@ https://dashboard.heroku.com
 
 ### :page_facing_up: MAILER
 
+#### Recovery Password
+
+```http
+  [POST] /api/mailer/recovery
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `email`   | `string` | Email to recovery password | :white_check_mark: |
+
 #### Send Mail
 
 ```http
