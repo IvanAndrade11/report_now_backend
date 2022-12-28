@@ -21,6 +21,15 @@ const controller = {
             res.status(500).json(error)
         }
     },
+    changePassword: async (req, res) => {
+        try {
+            const { token, newPassword, passwordConfirm } = req.body
+            const response = await service.changePassword(token, newPassword, passwordConfirm)
+            res.status(200).send(response)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
 };
 
 export default controller;

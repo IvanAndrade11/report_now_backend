@@ -33,7 +33,6 @@ const routerApi = (app) => {
 
     router.use(
         '/mailer',
-        checkApiKey,
         routerMailer
     );
 };

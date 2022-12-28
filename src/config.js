@@ -1,4 +1,5 @@
 export const PORT = process.env.PORT || 3000;
+export const ENDPOINT = process.env.ENDPOINT || 'http://localhost:3000/api';
 
 export const DB_CLUSTER = process.env.DB_CLUSTER || 'cluster0';
 export const DB_USER = process.env.DB_USER || 'admin';
