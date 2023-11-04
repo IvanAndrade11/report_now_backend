@@ -1,7 +1,7 @@
-## Location Data Base
+## Data Base Location
 https://cloud.mongodb.com/
 
-## Page Heroku to deploy API 
+## Page Heroku Deployed API 
 https://dashboard.heroku.com
 
 ## User Mailer Provider
@@ -9,10 +9,24 @@ https://dashboard.heroku.com
 
 ## API Reference
 
-### Endpoint
+### :rocket: ENDPOINT
 * https://report-now.herokuapp.com
 
-### USER
+### :robot: AUTHENTICATION
+
+#### Login
+
+```http
+  [POST] /api/auth/login
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `email`   | `string` | Email to sing in | :white_check_mark: |
+| `password` | `string` | Current Password | :white_check_mark: |
+
+** To make the following requests it is necessary to add in the header the bearer token that returns the login **
+### :busts_in_silhouette: USER
 
 #### List all users
 
@@ -72,18 +86,7 @@ https://dashboard.heroku.com
 | `password` | `string` | Current Password | :white_check_mark: |
 | `newPassword` | `string` | Password to change | :white_check_mark: |
 
-#### Sing In
-
-```http
-  [POST] /api/users/validate
-```
-
-| Parameter | Type     | Description                       | Required           |
-| :-------- | :------- | :-------------------------------- | :----------------- |
-| `email`   | `string` | Email to sing in | :white_check_mark: |
-| `password` | `string` | Current Password | :white_check_mark: |
-
-### REPORT
+### :pencil: REPORT
 
 #### List all reports
 
@@ -128,6 +131,30 @@ https://dashboard.heroku.com
 ```http
   [DELETE] /api/users/${id}
 ```
+
+### :page_facing_up: MAILER
+
+#### Recovery Password
+
+```http
+  [POST] /api/mailer/recovery
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `email`   | `string` | Email to recovery password | :white_check_mark: |
+
+#### Send Mail
+
+```http
+  [POST] /api/mailer/sendMail
+```
+
+| Parameter | Type     | Description                       | Required           |
+| :-------- | :------- | :-------------------------------- | :----------------- |
+| `to`   | `string` | Mail recipient | :white_check_mark: |
+| `subject`    | `string` | Text that will carry the subject of the email | :white_check_mark: |
+| `text`   | `string` | Information to send in the body of the email | :white_check_mark: |
 
 ## Authors
 

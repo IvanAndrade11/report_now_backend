@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const newsSchema = new Schema(
     {
@@ -25,4 +25,4 @@ const newsSchema = new Schema(
     }
 );
 
-export default model("News", newsSchema);
+export default model('News', newsSchema);
